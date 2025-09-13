@@ -1,5 +1,5 @@
 // Import the API_KEY from the .env file
-const API_KEY = "W1Booyb3vOHMkXAOz6Za9vriOLEcxdbiAqMqtcAJ";
+const API_KEY = "0nsfiKc7ddxOAuWcoz6NvaX5suSk3ZsyofdZSQAC";
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
