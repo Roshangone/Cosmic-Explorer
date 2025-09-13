@@ -1,5 +1,5 @@
-// Import the API_KEY from the config.js file
-const API_KEY = "__API_KEY_PLACEHOLDER__";
+// Import the API_KEY from the .env file
+const API_KEY = import.meta.env.VITE_API_KEY;
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
