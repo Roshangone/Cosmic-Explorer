@@ -1,5 +1,5 @@
 // Import the API_KEY from the config.js file
-const API_KEY = process.env.API_KEY;
+const API_KEY = "__API_KEY_PLACEHOLDER__";
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
