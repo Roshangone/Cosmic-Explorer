@@ -1,5 +1,5 @@
 // Import the API_KEY from the config.js file
-const API_KEY = window.API_KEY;
+const API_KEY = "YOUR_NASA_API_KEY";
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
