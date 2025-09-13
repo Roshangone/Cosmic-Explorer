@@ -1,5 +1,5 @@
 // Import the API_KEY from the config.js file
-import { API_KEY } from './config.js';
+const API_KEY = window.API_KEY;
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
