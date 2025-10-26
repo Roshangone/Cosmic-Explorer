@@ -24,10 +24,10 @@ navButtons.forEach(button => {
         
         // Load data based on the button clicked
         if (button.id === 'btn-apod') {
-            const selectedDate = document.getElementById('apod-date').value;
+            var selectedDate = document.getElementById('apod-date').value;
             // const selectedDate = document.getElementById('apod-date').value;
             //For now fetching previous years data as NASA shutdown it's services temporarily
-            let realDate = selectedDate.slice(0,-1) + '4';
+            let realDate = '2024' + selectedDate.substring(4);
             loadAPOD(realDate);
         } else if (button.id === 'btn-rover') {
             loadRoverPhotos();
@@ -45,7 +45,7 @@ const apodContent = document.getElementById('apod-content');
 loadApodBtn.addEventListener('click', () => {
     // const selectedDate = apodDateInput.value;
     var selectedDate = apodDateInput.value;
-    let realDate = selectedDate.slice(0,-1) + '4';
+    let realDate = '2024' + selectedDate.substring(4);
     if (realDate) {
         loadAPOD(realDate);
     } else {
