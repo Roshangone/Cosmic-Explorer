@@ -177,9 +177,11 @@ async function loadAsteroids() {
 
 // Load initial data for all sections
 window.onload = function() {
-    const today = new Date().toISOString().split("T")[0];
+    //const today = new Date().toISOString().split("T")[0];
+    var today = new Date().toISOString().split("T")[0];
     apodDateInput.value = today;
-    loadAPOD(today);
+    let realDate = '2024' + today.substring(4);
+    loadAPOD(realDate);
     loadRoverPhotos();
     loadAsteroids();
 }
