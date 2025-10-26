@@ -24,10 +24,11 @@ navButtons.forEach(button => {
         
         // Load data based on the button clicked
         if (button.id === 'btn-apod') {
-            var selectedDate = document.getElementById('apod-date').value;
+            const selectedDate = document.getElementById('apod-date').value;
+            // const selectedDate = document.getElementById('apod-date').value;
             //For now fetching previous years data as NASA shutdown it's services temporarily
-            let selectedDate = '2024' + selectedDate.substring(4);
-            loadAPOD(selectedDate);
+            let realDate = selectedDate.slice(0,-1) + '4';
+            loadAPOD(realDate);
         } else if (button.id === 'btn-rover') {
             loadRoverPhotos();
         } else if (button.id === 'btn-asteroids') {
@@ -42,9 +43,11 @@ const loadApodBtn = document.getElementById('load-apod');
 const apodContent = document.getElementById('apod-content');
 
 loadApodBtn.addEventListener('click', () => {
-    const selectedDate = apodDateInput.value;
-    if (selectedDate) {
-        loadAPOD(selectedDate);
+    // const selectedDate = apodDateInput.value;
+    var selectedDate = apodDateInput.value;
+    let realDate = selectedDate.slice(0,-1) + '4';
+    if (realDate) {
+        loadAPOD(realDate);
     } else {
         apodContent.innerHTML = `<p class="text-red-400">Please select a date.</p>`;
     }
