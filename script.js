@@ -24,7 +24,7 @@ navButtons.forEach(button => {
         
         // Load data based on the button clicked
         if (button.id === 'btn-apod') {
-            // const selectedDate = document.getElementById('apod-date').value;
+            var selectedDate = document.getElementById('apod-date').value;
             //For now fetching previous years data as NASA shutdown it's services temporarily
             let selectedDate = '2024' + selectedDate.substring(4);
             loadAPOD(selectedDate);
