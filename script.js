@@ -117,8 +117,8 @@ async function loadRoverPhotos() {
 
     } catch (error) {
         console.error("Error loading Mars Rover photos:", error);
-        // roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: ${error.message}. This is often caused by an invalid or rate-limited API key.</p>`;
-        roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: Nasa has shutdown its services temporarily which is the reason for several APIs erroring out.</p>`;
+        roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: ${error.message}. This is often caused by an invalid or rate-limited API key.</p>`;
+        // roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: Nasa has shutdown its services temporarily which is the reason for several APIs erroring out.</p>`;
     }
 }
 
