@@ -94,33 +94,101 @@ const roverContent = document.getElementById('rover-content');
 
 async function loadRoverPhotos() {
     roverContent.innerHTML = `<div class="loading-spinner w-10 h-10 border-4 border-gray-600 rounded-full mx-auto"></div>`;
-    try {
-        const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${API_KEY}`);
-        if (!res.ok) {
-            const errorData = await res.json();
-            throw new Error(errorData.error.message || 'API request failed.');
-        }
-        const data = await res.json();
-        const photos = data.latest_photos.slice(0, 6); // show up to 6 photos
 
-        if (photos.length === 0) {
-            roverContent.innerHTML = `<p class="text-gray-400 text-center">No photos found for the latest mission.</p>`;
+    try {
+        const res = await fetch("https://api.marsvista.dev/api/v2/photos", {
+            headers: {
+                "accept": "text/plain",
+                "X-API-Key": "mv_live_a09c7fb94c42b6906efb9b077640d3542af62cda"
+            }
+        });
+
+        if (!res.ok) {
+            throw new Error(`API request failed (${res.status})`);
+        }
+
+        const result = await res.json();
+
+        // MarsVista photos array
+        const photos = result.data.slice(0, 6);
+
+        if (!photos.length) {
+            roverContent.innerHTML = `
+                <p class="text-gray-400 text-center">
+                    No Mars images available.
+                </p>
+            `;
             return;
         }
 
-        roverContent.innerHTML = photos.map(p => `
-            <div class="bg-gray-700 p-4 rounded-lg shadow-lg">
-                <img class="w-full h-auto rounded-md object-cover transition-transform duration-300 transform hover:scale-105" src="${p.img_src}" alt="Mars Rover Photo" onerror="this.src='https://placehold.co/600x400?text=Image+Not+Available';">
-                <p class="mt-2 text-sm text-center text-gray-400">${p.rover.name} Rover - ${p.camera.full_name}</p>
-            </div>
-        `).join("");
+        roverContent.innerHTML = photos.map(item => {
+            const attrs = item.attributes;
+
+            //  Image URL priority:
+            const imageUrl =
+                attrs.images?.full ||
+                attrs.img_src ||
+                "https://placehold.co/600x400?text=Image+Not+Available";
+
+            return `
+                <div class="bg-gray-700 p-4 rounded-lg shadow-lg">
+                    <img
+                        class="w-full h-auto rounded-md object-cover transition-transform duration-300 transform hover:scale-105"
+                        src="${imageUrl}"
+                        alt="${attrs.title || 'Mars Image'}"
+                        loading="lazy"
+                        onerror="this.src='https://placehold.co/600x400?text=Image+Not+Available';"
+                    >
+                    <p class="mt-2 text-sm text-center text-gray-400">
+                        ${attrs.title || "Mars Rover Image"}
+                        <br>
+                        <span class="text-xs opacity-70">
+                            Sol ${attrs.sol} • ${attrs.earth_date}
+                        </span>
+                    </p>
+                </div>
+            `;
+        }).join("");
 
     } catch (error) {
-        console.error("Error loading Mars Rover photos:", error);
-        roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: ${error.message}. This is often caused by an invalid or rate-limited API key.</p>`;
-        // roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: Nasa has shutdown its services temporarily which is the reason for several APIs erroring out.</p>`;
+        console.error("Error loading MarsVista photos:", error);
+        roverContent.innerHTML = `
+            <p class="text-red-400 text-center">
+                Error loading photos: ${error.message}
+            </p>`;
     }
 }
+
+//commenting the below code since Nasa Rover API is archived and we are using marsvista API
+// async function loadRoverPhotos() {
+//     roverContent.innerHTML = `<div class="loading-spinner w-10 h-10 border-4 border-gray-600 rounded-full mx-auto"></div>`;
+//     try {
+//         const res = await fetch(`https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/latest_photos?api_key=${API_KEY}`);
+//         if (!res.ok) {
+//             const errorData = await res.json();
+//             throw new Error(errorData.error.message || 'API request failed.');
+//         }
+//         const data = await res.json();
+//         const photos = data.latest_photos.slice(0, 6); // show up to 6 photos
+
+//         if (photos.length === 0) {
+//             roverContent.innerHTML = `<p class="text-gray-400 text-center">No photos found for the latest mission.</p>`;
+//             return;
+//         }
+
+//         roverContent.innerHTML = photos.map(p => `
+//             <div class="bg-gray-700 p-4 rounded-lg shadow-lg">
+//                 <img class="w-full h-auto rounded-md object-cover transition-transform duration-300 transform hover:scale-105" src="${p.img_src}" alt="Mars Rover Photo" onerror="this.src='https://placehold.co/600x400?text=Image+Not+Available';">
+//                 <p class="mt-2 text-sm text-center text-gray-400">${p.rover.name} Rover - ${p.camera.full_name}</p>
+//             </div>
+//         `).join("");
+
+//     } catch (error) {
+//         console.error("Error loading Mars Rover photos:", error);
+//         roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: ${error.message}. This is often caused by an invalid or rate-limited API key.</p>`;
+//         // roverContent.innerHTML = `<p class="text-red-400 text-center">Error loading photos: Nasa has shutdown its services temporarily which is the reason for several APIs erroring out.</p>`;
+//     }
+// }
 
 // ----- Near-Earth Asteroids -----
 const asteroidsContent = document.getElementById('asteroids-content');
