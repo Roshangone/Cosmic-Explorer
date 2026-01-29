@@ -1,5 +1,5 @@
 // Import the API_KEY from the .env file
-// DO NOT hardcode an API, the following key is used for time being
+// DO NOT hardcode an API key, the following key is used for time being
 const API_KEY = "0nsfiKc7ddxOAuWcoz6NvaX5suSk3ZsyofdZSQAC";
 const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
