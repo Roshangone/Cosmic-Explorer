@@ -1,2 +1,2 @@
 # Ignore the file containing the API key
-config.js
+.env
