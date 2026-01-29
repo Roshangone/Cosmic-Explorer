@@ -24,11 +24,8 @@ navButtons.forEach(button => {
         
         // Load data based on the button clicked
         if (button.id === 'btn-apod') {
-            var selectedDate = document.getElementById('apod-date').value;
-            // const selectedDate = document.getElementById('apod-date').value;
-            //For now fetching previous years data as NASA shutdown it's services temporarily
-            let realDate = '2024' + selectedDate.substring(4);
-            loadAPOD(realDate);
+            const selectedDate = document.getElementById('apod-date').value;
+            loadAPOD(selectedDate);
         } else if (button.id === 'btn-rover') {
             loadRoverPhotos();
         } else if (button.id === 'btn-asteroids') {
@@ -43,11 +40,9 @@ const loadApodBtn = document.getElementById('load-apod');
 const apodContent = document.getElementById('apod-content');
 
 loadApodBtn.addEventListener('click', () => {
-    // const selectedDate = apodDateInput.value;
-    var selectedDate = apodDateInput.value;
-    let realDate = '2024' + selectedDate.substring(4);
-    if (realDate) {
-        loadAPOD(realDate);
+    const selectedDate = apodDateInput.value;
+    if (selectedDate) {
+        loadAPOD(selectedDate);
     } else {
         apodContent.innerHTML = `<p class="text-red-400">Please select a date.</p>`;
     }
@@ -159,7 +154,7 @@ async function loadRoverPhotos() {
     }
 }
 
-//commenting the below code since Nasa Rover API is archived and we are using marsvista API
+//commenting the below code as Nasa Rover API is archived and we are using marsvista API
 // async function loadRoverPhotos() {
 //     roverContent.innerHTML = `<div class="loading-spinner w-10 h-10 border-4 border-gray-600 rounded-full mx-auto"></div>`;
 //     try {
@@ -246,11 +241,9 @@ async function loadAsteroids() {
 
 // Load initial data for all sections
 window.onload = function() {
-    //const today = new Date().toISOString().split("T")[0];
-    var today = new Date().toISOString().split("T")[0];
+    const today = new Date().toISOString().split("T")[0];
     apodDateInput.value = today;
-    let realDate = '2024' + today.substring(4);
-    loadAPOD(realDate);
+    loadAPOD(today);
     loadRoverPhotos();
     loadAsteroids();
 }
