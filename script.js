@@ -242,7 +242,8 @@ async function loadAsteroids() {
 
 // Load initial data for all sections
 window.onload = function() {
-    const today = new Date().toISOString().split("T")[0];
+    // const today = new Date().toISOString().split("T")[0];
+    const today = new Date().toLocaleDateString('en-IN', { timeZone: 'America/New_York' });
     apodDateInput.value = today;
     loadAPOD(today);
     loadRoverPhotos();
