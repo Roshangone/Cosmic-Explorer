@@ -50,8 +50,6 @@ loadApodBtn.addEventListener('click', () => {
         loadAPOD(selectedDate);
     } else {
         // apodContent.innerHTML = `<p class="text-red-400">Please select a date.</p>`;
-            const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-            apodDateInput.value = today;
             loadAPOD(today);
     }
 });
@@ -250,8 +248,8 @@ async function loadAsteroids() {
 // Load initial data for all sections
 window.onload = function() {
     // const today = new Date().toISOString().split("T")[0];
-    // const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-    // apodDateInput.value = today;
+    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+    apodDateInput.value = today;
     // loadAPOD(today);
     loadRoverPhotos();
     loadAsteroids();
