@@ -5,7 +5,11 @@ const navButtons = document.querySelectorAll('nav button');
 const sections = document.querySelectorAll('.section-content');
 
 // Function to show a specific section and hide others
+const mainContainer = document.getElementById('main-container');
+
 function showSection(id) {
+    mainContainer.classList.remove('hidden');
+    
     sections.forEach(section => {
         if (section.id === id) {
             section.classList.add('active');
