@@ -248,8 +248,12 @@ async function loadAsteroids() {
 // Load initial data for all sections
 window.onload = function() {
     // const today = new Date().toISOString().split("T")[0];
-    const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
-    apodDateInput.value = today;
+    //     const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+    // apodDateInput.value = today;
+    const today = new Date()
+    today.setDate(today.getDate()-1):
+    const yesterday = today.toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+    apodDateInput.value = yesterday;
     // loadAPOD(today);
     loadRoverPhotos();
     loadAsteroids();
